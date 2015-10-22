@@ -14,56 +14,51 @@
 import socket,time
 import ConfigParser
 
-def get_server_address():
+class SendDataToServer:
+    #global connFd
 
-    config = ConfigParser.ConfigParser()
-    try:
-        with open('../conf/config.ini') as cfgfile:
-            config.readfp(cfgfile)
-            try:
-                serveraddress = config.get("serveraddress", "serveraddress")
-                serverport = config.get("serverport", "serverport")
-                return serveraddress,serverport
-            except IOError as err:
-                print "Configure Item Not Found %s" %(str(err))
-    except IOError as err:
-        print "Configure File Not Not Found %s" %(str(err))
+    def __init__(self,serveraddress,serverport):
 
-def connect2server():
+        self.serveraddress = serveraddress
+        self.serverport = serverport
+        try:
+            self.connFd = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        except socket.error, msg:
+            print msg
+        try:
+            self.connFd.connect((self.serveraddress, int(self.serverport)))
+            print "Connect To Server Success"
+        except socket.error,msg:
+            print msg
 
-    serveraddress, serverport = get_server_address()
-
-    print serveraddress,serverport
-
-    try:
-        connFd = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-    except socket.error, msg:
-        print msg
-    try:
-        connFd.connect((serveraddress, int(serverport)))
-        print "Connect To Server Success"
-    except socket.error,msg:
-        print msg
-
-    return connFd
+    # def connect2server(self):
+    #     try:
+    #         connFd = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    #     except socket.error, msg:
+    #         print msg
+    #     try:
+    #         connFd.connect((self.serveraddress, int(self.serverport)))
+    #         print "Connect To Server Success"
+    #     except socket.error,msg:
+    #         print msg
+    #
+    #     return connFd
 
 
 
-def send2server(data):
-    connFd = connect2server()
-    if connFd.send(data) != len(data):
-        print "Message Send Failed!"
-        return
+    def send2server(self,data):
 
-    readData = connFd.recv(1024)
+        if self.connFd.send(data) != len(data):
+            print "Message Send Failed!"
+            return
 
-    print readData
-    # if not readData:
-    #     if str(len(data)) == readData.split(":")[3].strip():
-    #         print "Message Has Send Success!"
-    #     else:
-    #         print "Message Send failed"
-    #else:
-        #time.sleep(1)
+        readData = self.connFd.recv(1024)
 
-    connFd.close()
+        print readData
+        # if not readData:
+        #     if str(len(data)) == readData.split(":")[3].strip():
+        #         print "Message Has Send Success!"
+        #     else:
+        #         print "Message Send failed"
+        #else:
+            #time.sleep(1)
