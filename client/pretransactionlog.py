@@ -72,11 +72,11 @@ def transactionlog(lines):
             userAgentType = patt.findall(userAgent)[0].split(',')[1]
             AagentSystem =  patt.findall(userAgent)[0].split(',')[2]
         elif len(patt.findall(userAgent)[0].split(';')) > 3:
-            print patt.findall(userAgent)[0].split(';')
+            #print patt.findall(userAgent)[0].split(';')
             AagentSystem =  patt.findall(userAgent)[0].split(';')[2]
             userAgentType = patt.findall(userAgent)[0].split(';')[3]
         else:
-            print 'iphone'
+            #print 'iphone'
             AagentSystem =  patt.findall(userAgent)[0].split(';')[1]
             userAgentType = patt.findall(userAgent)[0].split(';')[0]
 
@@ -95,6 +95,6 @@ def transactionlog(lines):
         #print str_time
 
         logContent = log_info(ip,str_time,reqUri,status,bodyBytesSent,userAgentType,AagentSystem,remoteAddr,upstreamIp,upstreamResTime,upstreamReqTime)
-        print logContent
+        #print logContent
         #print logContent
         return (json.dumps(logContent,default=log_info2dict))

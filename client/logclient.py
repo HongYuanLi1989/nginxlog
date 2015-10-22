@@ -11,56 +11,33 @@
 @file: logclient.py
 @time: 10/14/15 12:27 PM
 """
-import socket,time
-import ConfigParser
+import socket
 
-class SendDataToServer:
-    #global connFd
+def createconnect(serveraddress,serverport):
 
-    def __init__(self,serveraddress,serverport):
+    try:
+        connFd = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        return connFd
+    except socket.error, msg:
+        print msg
 
-        self.serveraddress = serveraddress
-        self.serverport = serverport
-        try:
-            self.connFd = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        except socket.error, msg:
-            print msg
-        try:
-            self.connFd.connect((self.serveraddress, int(self.serverport)))
-            print "Connect To Server Success"
-        except socket.error,msg:
-            print msg
+def connectserver(connFd,serveraddress,serverport):
+    try:
+        connFd.connect((serveraddress, int(serverport)))
+        print "Connect Server Success"
+        flag = 1
+    except socket.error,msg:
+        print msg
+        flag = 0
+def send2server(connFd,data):
 
-    # def connect2server(self):
-    #     try:
-    #         connFd = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-    #     except socket.error, msg:
-    #         print msg
-    #     try:
-    #         connFd.connect((self.serveraddress, int(self.serverport)))
-    #         print "Connect To Server Success"
-    #     except socket.error,msg:
-    #         print msg
-    #
-    #     return connFd
+    if connFd.send(data) != len(data):
+        print "Message Send Failed!"
+        return
 
+    readData = connFd.recv(1024)
 
+    print readData
 
-    def send2server(self,data):
-
-        if self.connFd.send(data) != len(data):
-            print "Message Send Failed!"
-            return
-
-        readData = self.connFd.recv(1024)
-
-        print readData
-        # if not readData:
-        #     if str(len(data)) == readData.split(":")[3].strip():
-        #         print "Message Has Send Success!"
-        #     else:
-        #         print "Message Send failed"
-        #else:
-            #time.sleep(1)
-
-        self.connFd.close()
+def connect_close(connFd):
+    connFd.close()
