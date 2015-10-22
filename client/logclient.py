@@ -62,3 +62,5 @@ class SendDataToServer:
         #         print "Message Send failed"
         #else:
             #time.sleep(1)
+
+        self.connFd.close()
