@@ -10,7 +10,7 @@
 """
 
 import ConfigParser
-from logclient import *
+from loopreadlog import *
 from pretransactionlog import transactionlog
 
 def get_file_name():
@@ -50,6 +50,7 @@ def get_content(file_name, last_file_size,flag,connFd):
         #对读取的日志记录进行处理按行
         data = transactionlog(line)
         #print type(data)
+        #print flag
         if data is not None and flag == 1:
             #发送处理的日志到服务端，JSON格式
             send2server(connFd, data)
@@ -60,7 +61,7 @@ def get_content(file_name, last_file_size,flag,connFd):
 
 def write_file(data):
 
-    with open("/data/logs/bak_file_1.json","a+") as f_b:
+    with open("/data/logs/bak_file_1.json", "a+") as f_b:
         #data = json.loads(data)
         f_b.write(data+'\n')
         print "wirte to file:%s" %data

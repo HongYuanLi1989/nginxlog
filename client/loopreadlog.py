@@ -11,7 +11,7 @@
 import time
 from monitorclient import *
 from logclient import *
-from pretransactionlog import transactionlog
+
 
 def createconnect(serveraddress,serverport):
 
@@ -31,7 +31,7 @@ def processloop():
 
     last_file_size = file_size
 
-    connFd = createconnect(server_address,server_port)
+    connFd = createconnect(server_address, server_port)
     i = 0
     flag = 0
     while True:
@@ -90,6 +90,27 @@ def processloop():
                 print "file not change!"
             last_file_size = file_size
             time.sleep(int(time_kick))
+
+
+def send2server(connFd, data):
+
+    if connFd.send(data):
+        pass
+    else:
+        print "Message Send Failed!"
+        connFd = ''
+
+        connect_close(connFd)
+
+        processloop()
+
+    readData = connFd.recv(1024)
+
+    print readData
+
+def connect_close(connFd):
+
+    connFd.close()
 
 
 
