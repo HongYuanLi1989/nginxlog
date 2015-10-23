@@ -52,7 +52,7 @@ def get_content(file_name, last_file_size,flag,connFd):
         #print type(data)
         if data is not None and flag == 1:
             #发送处理的日志到服务端，JSON格式
-            send2server(connFd,data)
+            send2server(connFd, data)
         elif data is not None:
             write_file(data)
             print data

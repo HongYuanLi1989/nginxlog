@@ -12,28 +12,13 @@
 @time: 10/14/15 12:27 PM
 """
 import socket
+from loopreadlog import processloop
 
-def createconnect(serveraddress,serverport):
-
-    try:
-        connFd = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        return connFd
-    except socket.error, msg:
-        print msg
-
-def connectserver(connFd,serveraddress,serverport):
-    try:
-        connFd.connect((serveraddress, int(serverport)))
-        print "Connect Server Success"
-        flag = 1
-    except socket.error,msg:
-        print msg
-        flag = 0
 def send2server(connFd,data):
 
     if connFd.send(data) != len(data):
         print "Message Send Failed!"
-        return
+        return processloop()
 
     readData = connFd.recv(1024)
 
