@@ -4,5 +4,7 @@
     <content url="file://$MODULE_DIR$" />
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="module" module-name="nginx_log_show" />
+    <orderEntry type="module" module-name="CMDB" />
   </component>
 </module>

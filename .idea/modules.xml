@@ -2,6 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/../lmanager/CMDB/.idea/CMDB.iml" filepath="$PROJECT_DIR$/../lmanager/CMDB/.idea/CMDB.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../nginx_log_show/.idea/nginx_log_show.iml" filepath="$PROJECT_DIR$/../nginx_log_show/.idea/nginx_log_show.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/nginxlog.iml" filepath="$PROJECT_DIR$/.idea/nginxlog.iml" />
     </modules>
   </component>
