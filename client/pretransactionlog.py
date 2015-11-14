@@ -14,11 +14,12 @@ import json,time,re
 from logformat import log_info
 from logformat import log_info2dict
 
+#时间处理函数
 def parsetime(date, month, year, log_time):
     time_str = '%s%s%s %s' % (year, month, date, log_time)
     return time.mktime(time.strptime(time_str, '%Y%b%d %H:%M:%S'))
 
-
+#日志格式化函数
 def transactionlog(lines):
     
     ipP = r"?P<ip>[\d.]*"
@@ -38,7 +39,7 @@ def transactionlog(lines):
     upstreamResponseTime = r"?P<ReTime>[\d.\d+]*"
     upstreamRequestTime = r"?P<requTime>[\d.\d+]*"
 
-
+    #对读取到的行进行正则匹配
     nginxLogPattern = re.compile(r"(%s)\ -\ \[(%s)/(%s)/(%s)\:(%s)\ (%s)\]\ (%s)\ (%s)\ (%s)\ \"-\"\ (%s)\ (%s)\ (%s)\ (%s)\ (%s)" %(ipP, dateP, monthP, yearP, log_timeP, timezoneP, requestP, statusP, bodyBytesSentP, userAgentP, remoteIP,upstreamAddr, upstreamResponseTime, upstreamRequestTime), re.VERBOSE)
     matchs = nginxLogPattern.match(lines)
     #print lines

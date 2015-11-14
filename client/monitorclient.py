@@ -58,7 +58,7 @@ def get_content(file_name, last_file_size,flag,connFd):
             write_file(data)
             print data
     f.close()
-
+#如果连接失败，将处理的结果写入到本地文件，没有的话会自动创建
 def write_file(data):
 
     with open("/data/logs/bak_file_1.json", "a+") as f_b:

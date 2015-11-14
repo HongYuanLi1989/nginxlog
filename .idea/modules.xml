@@ -5,6 +5,7 @@
       <module fileurl="file://$PROJECT_DIR$/../lmanager/CMDB/.idea/CMDB.iml" filepath="$PROJECT_DIR$/../lmanager/CMDB/.idea/CMDB.iml" />
       <module fileurl="file://$PROJECT_DIR$/../nginx_log_show/.idea/nginx_log_show.iml" filepath="$PROJECT_DIR$/../nginx_log_show/.idea/nginx_log_show.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/nginxlog.iml" filepath="$PROJECT_DIR$/.idea/nginxlog.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../go_scripts/src/.idea/src.iml" filepath="$PROJECT_DIR$/../go_scripts/src/.idea/src.iml" />
     </modules>
   </component>
 </project>

@@ -6,5 +6,7 @@
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="module" module-name="nginx_log_show" />
     <orderEntry type="module" module-name="CMDB" />
+    <orderEntry type="module" module-name="src" />
+    <orderEntry type="library" scope="PROVIDED" name="Go SDK" level="project" />
   </component>
 </module>
